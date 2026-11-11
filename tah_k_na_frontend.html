@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahák na Písemku: Frontend</title>
+    <!-- Používáme Tailwind CSS pro moderní, rychlý a responzivní design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Skrytí defaultní šipky u details tagu ve všech prohlížečích */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        /* Plynulý přechod šipky */
+        summary svg {
+            transition: transform 0.3s ease-in-out;
+        }
+        details[open] summary svg {
+            transform: rotate(180deg);
+        }
+
+        /* Vlastní stylování pro řádkový kód, aby vynikl */
+        code.inline-code {
+            background-color: #030712; /* Velmi tmavě šedá */
+            color: #f472b6; /* Růžová pro kontrast */
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+            font-family: monospace;
+        }
+
+        /* Vlastní stylování pro bloky kódu */
+        pre.code-block {
+            background-color: #030712;
+            color: #e5e7eb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            border: 1px solid #374151;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Animace pro interaktivní tlačítko */
+        .btn-animate {
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans antialiased min-h-screen selection:bg-blue-500 selection:text-white pb-12">
+
+    <div class="max-w-2xl mx-auto p-4 md:p-6">
+        
+        <!-- HLAVIČKA -->
+        <header class="text-center mb-8 pt-4">
+            <div class="inline-block bg-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 shadow-lg shadow-blue-500/30">
+                Příprava na test
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2">
+                Tahák na Frontend
+            </h1>
+            <p class="text-gray-400 text-sm md:text-base">
+                Rychlé opakování CSS & JS před písemkou. Chytáky vyřešeny!
+            </p>
+        </header>
+
+        <!-- INTERAKTIVNÍ UKÁZKA (Praktická část z testu) -->
+        <section class="bg-gray-800 rounded-2xl p-5 mb-8 border border-gray-700 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500"></div>
+            
+            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Živá ukázka (DOM & Eventy)
+            </h2>
+            
+            <p class="text-sm text-gray-400 mb-4">Klikni na tlačítko a sleduj, jak JavaScript mění inline styly a obsah DOMu. Přesně tohle po tobě budou chtít v praxi.</p>
+            
+            <div class="bg-gray-900 rounded-xl p-6 flex flex-col items-center justify-center border border-gray-700/50 min-h-[160px]">
+                <button id="mojeTlacitko" class="btn-animate bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-lg shadow-blue-900/50 outline-none focus:ring-4 focus:ring-blue-500/50">
+                    Klikni na mě!
+                </button>
+                
+                <div id="vysledekAkce" class="mt-4 text-center hidden">
+                    <p class="text-emerald-400 font-medium bg-emerald-400/10 px-4 py-2 rounded-lg border border-emerald-400/20">
+                        Event zachycen! 🎉
+                    </p>
+                    <button id="resetTlacitko" class="text-xs text-gray-500 hover:text-gray-300 mt-3 underline decoration-gray-600 underline-offset-2">
+                        Vrátit do původního stavu
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDIJNÍ KARTIČKY (Akordeon) -->
+        <section class="space-y-4">
+            <h3 class="text-gray-400 font-semibold text-sm uppercase tracking-widest pl-1 mb-2">Témata testu</h3>
+
+            <!-- 1. FLEXBOX -->
+            <details class="group bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <summary class="flex justify-between items-center font-medium cursor-pointer p-5 select-none">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                        </div>
+                        <span class="text-lg text-white">CSS Flexbox (Centrování)</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-5 pt-0 text-gray-300 border-t border-gray-700/50 mt-2">
+                    <p class="mb-3">Absolutní základ! Jak vycentrovat prvek dokonale na střed (horizontálně i vertikálně)? Musíš to aplikovat na <strong>rodičovský kontejner</strong>.</p>
+<pre class="code-block">.kontejner {
+  display: flex;
+  justify-content: center; /* Horizontální střed */
+  align-items: center;     /* Vertikální střed */
+  height: 100vh;           /* Musí mít výšku! */
+}</pre>
+                    <p class="mt-3 text-sm border-l-4 border-yellow-500 pl-3 bg-yellow-500/10 py-2 rounded-r">
+                        <strong class="text-yellow-500">Chyták:</strong> Pokud změníš směr přes <code class="inline-code">flex-direction: column;</code>, osy se prohodí! <code class="inline-code">justify-content</code> pak centruje vertikálně.
+                    </p>
+                </div>
+            </details>
+
+            <!-- 2. POZICOVÁNÍ -->
+            <details class="group bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <summary class="flex justify-between items-center font-medium cursor-pointer p-5 select-none">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                        </div>
+                        <span class="text-lg text-white">CSS Pozicování</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-5 pt-0 text-gray-300 border-t border-gray-700/50 mt-2 space-y-3">
+                    <p>Jakmile použiješ <code class="inline-code">position: absolute;</code> nebo <code class="inline-code">fixed</code>, prvek se <strong>vytrhne z normálního toku dokumentu</strong>. Ostatní prvky se chovají, jako by tam vůbec nebyl.</p>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-400">
+                        <li><strong class="text-white">static</strong> - výchozí, normální tok dokumentu.</li>
+                        <li><strong class="text-white">relative</strong> - zůstává v toku, ale můžeš s ním hýbat (top, left). <strong>Tvoří záchytný bod pro absolutní potomky!</strong></li>
+                        <li><strong class="text-white">absolute</strong> - vytržen z toku. Pozicuje se vůči nejbližšímu předkovi, který má relative/absolute/fixed.</li>
+                        <li><strong class="text-white">fixed</strong> - vytržen z toku. Fixován k oknu prohlížeče (zůstává při scrollu).</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 3. BLOCK VS INLINE -->
+            <details class="group bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <summary class="flex justify-between items-center font-medium cursor-pointer p-5 select-none">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                        </div>
+                        <span class="text-lg text-white">Blokové vs Inline prvky</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-5 pt-0 text-gray-300 border-t border-gray-700/50 mt-2 space-y-4 text-sm">
+                    <div>
+                        <strong class="text-white block mb-1">Blokové prvky (div, p, h1, section)</strong>
+                        Zabírají 100% dostupné šířky. Začínají na novém řádku. <em>Můžeš jim nastavovat width, height, margin i padding.</em>
+                    </div>
+                    <div>
+                        <strong class="text-white block mb-1">Inline prvky (span, a, strong)</strong>
+                        Zabírají jen šířku svého obsahu. Řadí se vedle sebe. <em>Nemůžeš jim nastavit výšku/šířku! Margin-top a bottom na ně často nefunguje správně.</em>
+                    </div>
+                    <p class="border-l-4 border-emerald-500 pl-3 bg-emerald-500/10 py-2 rounded-r">
+                        <strong>Řešení (Chyták):</strong> Použij <code class="inline-code">display: inline-block;</code>. Prvek zůstane v řádku, ale můžeš mu dát padding i rozměry (ideální pro tlačítka).
+                    </p>
+                </div>
+            </details>
+
+            <!-- 4. JS: VÝBĚR Z DOMU -->
+            <details class="group bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <summary class="flex justify-between items-center font-medium cursor-pointer p-5 select-none">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <span class="text-lg text-white">JS: Výběr z DOMu</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-5 pt-0 text-gray-300 border-t border-gray-700/50 mt-2">
+                    <p class="mb-2">Nejuniverzálnější metoda je dnes <code class="inline-code">querySelector</code>. Používá stejné selektory jako CSS!</p>
+<pre class="code-block">// Výběr podle třídy (nezapomeň na TEČKU!)
+const modal = document.querySelector(".modal-box");
+
+// Výběr podle ID (nezapomeň na KŘÍŽEK!)
+const btn = document.querySelector("#hlavni-tlacitko");
+
+// Zastaralá metoda (zde se naopak # nepíše):
+const btn2 = document.getElementById("hlavni-tlacitko");</pre>
+                </div>
+            </details>
+
+            <!-- 5. JS: EVENT LISTENERS -->
+            <details class="group bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <summary class="flex justify-between items-center font-medium cursor-pointer p-5 select-none">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                        </div>
+                        <span class="text-lg text-white">JS: Zachytávání událostí</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-5 pt-0 text-gray-300 border-t border-gray-700/50 mt-2">
+                    <p class="border-l-4 border-red-500 pl-3 bg-red-500/10 py-2 rounded-r mb-3 text-sm">
+                        <strong class="text-red-400">Častá chyba:</strong> Psát do HTML <code class="inline-code">&lt;button onclick="funkce()"&gt;</code> je zastaralé a špatné. V JS se názvy událostí píšou <strong>BEZ slovíčka "on"</strong>.
+                    </p>
+<pre class="code-block">const tlacitko = document.querySelector(".btn");
+
+// Správně! Použij "click", nikoliv "onclick"
+tlacitko.addEventListener("click", function() {
+    console.log("Kliknuto!");
+});</pre>
+                </div>
+            </details>
+
+            <!-- 6. JS: ÚPRAVA CSS -->
+            <details class="group bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <summary class="flex justify-between items-center font-medium cursor-pointer p-5 select-none">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                        </div>
+                        <span class="text-lg text-white">JS: Úprava CSS stylů</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="p-5 pt-0 text-gray-300 border-t border-gray-700/50 mt-2">
+                    <p class="mb-3 text-sm">JavaScript nepodporuje v názvech proměnných pomlčky. Proto se všechny CSS vlastnosti přepisují z <code class="inline-code">kebab-case</code> do <code class="inline-code">camelCase</code> (velbloudí notace).</p>
+                    
+                    <ul class="list-disc pl-5 mb-3 text-sm text-gray-400">
+                        <li><code class="inline-code">background-color</code> ➡️ <code class="inline-code">backgroundColor</code></li>
+                        <li><code class="inline-code">font-size</code> ➡️ <code class="inline-code">fontSize</code></li>
+                    </ul>
+<pre class="code-block">const box = document.querySelector(".box");
+
+// 1. Změna inline stylu
+box.style.backgroundColor = "red";
+
+// 2. Lepší cesta? Přidat CSS třídu
+box.classList.add("aktivni");</pre>
+                </div>
+            </details>
+        </section>
+
+    </div>
+
+    <!-- JAVASCRIPT PRO INTERAKTIVNÍ UKÁZKU -->
+    <script>
+        // DOM: Vybereme elementy na stránce
+        // (Všimni si použití křížku, protože v HTML mají atribut 'id')
+        const tlacitko = document.querySelector('#mojeTlacitko');
+        const vysledekBox = document.querySelector('#vysledekAkce');
+        const resetTlacitko = document.querySelector('#resetTlacitko');
+
+        // Uložíme si původní text a styl, abychom to mohli resetovat
+        const puvodniText = tlacitko.textContent;
+        const puvodniTridy = tlacitko.className; // Původní Tailwind třídy
+
+        // Event Listener: Zachytíme kliknutí na hlavní tlačítko
+        tlacitko.addEventListener('click', function() {
+            
+            // 1. ZMĚNA OBSAHU A TŘÍD
+            tlacitko.textContent = 'Kliknuto! 😎';
+            
+            // 2. ZMĚNA INLINE STYLŮ PŘES JS (Ukázka camelCase na pozadí)
+            // Záměrně nepoužíváme Tailwind k přepisu barvy, abychom ukázali .style API
+            tlacitko.style.backgroundColor = '#10b981'; // Smaragdově zelená
+            tlacitko.style.transform = 'scale(1.05)';
+            tlacitko.style.boxShadow = '0 10px 25px -5px rgba(16, 185, 129, 0.5)';
+            
+            // 3. ZOBRAZENÍ VÝSLEDKU
+            // Z elementu #vysledekAkce odstraníme třídu 'hidden', tím se zobrazí
+            vysledekBox.classList.remove('hidden');
+        });
+
+        // Event Listener pro RESET tlačítko
+        resetTlacitko.addEventListener('click', function() {
+            // Vrátíme text
+            tlacitko.textContent = puvodniText;
+            
+            // Vymažeme inline styly (nastavíme je na prázdný string)
+            tlacitko.style.backgroundColor = '';
+            tlacitko.style.transform = '';
+            tlacitko.style.boxShadow = '';
+            
+            // Skryjeme vyskakovací okénko s hláškou
+            vysledekBox.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
